@@ -1,3 +1,4 @@
+### Godot ###
 # Godot 4+ specific ignores
 .godot/
 
@@ -16,5 +17,10 @@ mono_crash.*.json
 
 # Custom
 addons/
-!addons/godot-rapier2d
-!addons/gdDelaunay
+!addons/godot-rapier2d/
+!addons/gdDelaunay/
+
+auto_export_version_config_file.gd
+
+dist/
+!dist/bundle.py

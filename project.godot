@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Yttrium"
-config/version="0.1.2.0"
+config/version="2-d625b55"
 run/main_scene="res://shatter.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -28,7 +28,7 @@ window/per_pixel_transparency/allowed=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gdDelaunay/plugin.cfg")
+enabled=PackedStringArray("res://addons/AutoExportVersion/plugin.cfg", "res://addons/gdDelaunay/plugin.cfg")
 
 [physics]
 
