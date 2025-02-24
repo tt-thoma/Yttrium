@@ -10,6 +10,7 @@ extends Node2D
 	]
 
 var CollisionWindow: PackedScene = load("res://collision_window.tscn")
+var VersionFile: GDScript = load("res://auto_export_version_config_file.gd")
 var quitting: bool = false
 var delaunay: Delaunay
 
@@ -97,7 +98,8 @@ func setup_windows(sites, dividor) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("Yttrium by tt_thoma")
-	print("GPLv3")
+	print("Version: " + Version.VERSION)
+	print("Licensed under GPLv3")
 	setup_main_window()
 	setup_boxes()
 	setup_delaunay(50)
