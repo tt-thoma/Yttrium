@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://vatu08gdvfne"]
+
+[ext_resource type="Script" path="res://collision_window.gd" id="1_ebivd"]
+
+[node name="CollisionWindow" type="RigidBody2D"]
+script = ExtResource("1_ebivd")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="Window" type="Window" parent="."]
+transparent_bg = true
+initial_position = 2
+size = Vector2i(1, 1)
+unresizable = true
+always_on_top = true
+transparent = true
+
+[node name="Camera2D" type="Camera2D" parent="Window"]
+
+[connection signal="close_requested" from="Window" to="." method="_on_window_close_requested"]
