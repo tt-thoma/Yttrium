@@ -16,11 +16,6 @@ data_*/
 mono_crash.*.json
 
 # Custom
-addons/
-!addons/godot-rapier2d/
-!addons/gdDelaunay/
-
-auto_export_version_config_file.gd
-
-dist/
+dist/*
+!dist/*.zip
 !dist/bundle.py
