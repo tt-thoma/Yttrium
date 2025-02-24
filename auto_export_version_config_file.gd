@@ -4,7 +4,7 @@ func get_version(features: PackedStringArray, is_debug: bool, path: String, flag
 	var version: String = ""
 	
 	version += get_git_commit_count()
-	version += "-"
+	version += "."
 #	version += get_git_branch_name()
 	version += get_git_commit_hash()
 #	version += get_export_preset_version()

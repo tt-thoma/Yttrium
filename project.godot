@@ -8,10 +8,14 @@
 
 config_version=5
 
+[addons]
+
+AutoExportVersion/version_store_location=0
+
 [application]
 
 config/name="Yttrium"
-config/version="2-d625b55"
+config/version="4."
 run/main_scene="res://shatter.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"

@@ -97,7 +97,7 @@ func setup_windows(sites, dividor) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("Yttrium by tt_thoma")
-	print("CC BY-SA-NC")
+	print("GPLv3")
 	setup_main_window()
 	setup_boxes()
 	setup_delaunay(50)
