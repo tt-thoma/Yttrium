@@ -1,6 +1,6 @@
 extends "res://addons/AutoExportVersion/VersionProvider.gd"
 
-func get_version(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> String:
+func get_version(_features: PackedStringArray, _is_debug: bool, _path: String, _flags: int) -> String:
 	var version: String = ""
 	
 	version += get_git_branch_name()
@@ -8,7 +8,7 @@ func get_version(features: PackedStringArray, is_debug: bool, path: String, flag
 	version += get_git_commit_count()
 	version += "."
 	version += get_git_commit_hash()
-	if is_debug:
+	if _is_debug:
 		version += "-DEBUG"
 	else:
 		version += "-RELEASE"

@@ -1,8 +1,7 @@
 extends RigidBody2D
 
 var has_polygon: bool = false
-var lower: Vector2
-var higher: Vector2
+var furthest: float
 var size: Vector2i
 var half_size: Vector2i
 
@@ -12,35 +11,26 @@ func _ready() -> void:
 
 func set_polygon(polygon) -> void:
 	$CollisionPolygon2D.set_polygon(polygon)
-	
 
 func add_to_window(element) -> void:
 	$Window.add_child(element)
 	if not is_instance_of(element, Polygon2D):
 		return
 	
-	for rot_deg in range(360):
-		var rot_rad = deg_to_rad(rot_deg)
-		for child in $Window.get_children():
-			if not is_instance_of(child, Polygon2D):
-				continue
-			if not has_polygon:
-				has_polygon = true
-				lower = child.polygon[0]
-				higher = child.polygon[0]
-				continue
-			
-			for point in child.polygon:
-				var poly_point = point.rotated(rot_rad)
-				if poly_point.x < lower.x:
-					lower.x = poly_point.x
-				elif poly_point.x > higher.x:
-					higher.x = poly_point.x
-				if poly_point.y < lower.y:
-					lower.y = poly_point.y
-				elif poly_point.y > higher.y:
-					higher.y = poly_point.y
-	size = Vector2i(higher - lower)
+	for child in $Window.get_children():
+		if not is_instance_of(child, Polygon2D):
+			continue
+		if not has_polygon:
+			has_polygon = true
+			furthest = child.polygon[0].length()
+			continue
+		
+		for point in child.polygon:
+			var length = point.length()
+			if length > furthest:
+				furthest = length
+	@warning_ignore("narrowing_conversion")
+	size = 2*Vector2i(furthest, furthest)
 	# Windows (OS) doesn't like less than 120px wide windows
 	size.x = max(120, size.x)
 	half_size = size/2

@@ -9,8 +9,9 @@ extends Node2D
 		Vector2.ZERO
 	]
 
+@export var DEBUG: bool = false
 var CollisionWindow: PackedScene = load("res://collision_window.tscn")
-var VersionFile: GDScript = load("res://auto_export_version_config_file.gd")
+var VersionFile: GDScript = load("res://version.gd")
 var quitting: bool = false
 var delaunay: Delaunay
 
@@ -22,7 +23,8 @@ func setup_main_window() -> void:
 	get_window().size = SIZE
 	get_window().position = Vector2i.ZERO
 	get_window().mode = Window.MODE_MAXIMIZED
-	DisplayServer.window_set_mouse_passthrough([Vector2.ZERO, Vector2.ZERO])
+	if not DEBUG:
+		DisplayServer.window_set_mouse_passthrough([Vector2.ZERO, Vector2.ZERO])
 
 func setup_boxes() -> void:
 	$Ceiling/Hitbox.shape.a = Vector2(0, 0)
@@ -65,7 +67,18 @@ func setup_windows(sites, dividor) -> void:
 			continue
 		
 		var polygon_obj: Polygon2D = Polygon2D.new()
-		polygon = Geometry2D.intersect_polygons(CUTOUT, site.polygon)[0]
+		var polygons = Geometry2D.intersect_polygons(CUTOUT, site.polygon)
+		match len(polygons):
+			0:
+				print(CUTOUT)
+				push_error("Cutout (see above) has made an empty polygon!")
+				continue
+			1:
+				polygon = polygons[0]
+			var other:
+				print(CUTOUT)
+				push_warning("Coutout (see above) has made " + str(other) + " polygons! Choosing the first")
+				polygon = polygons[0]
 		
 		var top_left: Vector2 = polygon[0]
 		for point in polygon:
@@ -98,7 +111,7 @@ func setup_windows(sites, dividor) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("Yttrium by tt_thoma")
-	print("Version: " + Version.VERSION)
+	print("Version: " + VersionFile.VERSION)
 	print("Licensed under GPLv3")
 	setup_main_window()
 	setup_boxes()
@@ -121,6 +134,7 @@ func quit():
 	quitting = true
 	$CloseConfirmation.mode = Window.MODE_WINDOWED
 	$CloseConfirmation.visible = true
+	$Ceiling.queue_free()
 	$Floor.queue_free()
 	$Mouse.queue_free()
 	var can_leave: bool = false

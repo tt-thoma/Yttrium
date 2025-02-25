@@ -20,10 +20,6 @@ run/main_scene="res://shatter.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
-
-Version="*res://version.gd"
-
 [display]
 
 window/size/viewport_width=1

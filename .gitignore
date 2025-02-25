@@ -17,5 +17,4 @@ mono_crash.*.json
 
 # Custom
 dist/*
-!dist/*.zip
 !dist/bundle.py
