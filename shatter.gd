@@ -27,17 +27,8 @@ func setup_main_window() -> void:
 		DisplayServer.window_set_mouse_passthrough([Vector2.ZERO, Vector2.ZERO])
 
 func setup_boxes() -> void:
-	$Ceiling/Hitbox.shape.a = Vector2(0, 0)
-	$Ceiling/Hitbox.shape.b = Vector2(SIZE.x, 0)
-	
-	$"Left Wall/Hitbox".shape.a = Vector2(0, 0)
-	$"Left Wall/Hitbox".shape.b = Vector2(0, SIZE.y)
-	
-	$"Right Wall/Hitbox".shape.a = Vector2(SIZE.x, 0)
-	$"Right Wall/Hitbox".shape.b = Vector2(SIZE.x, SIZE.y)
-	
-	$Floor/Hitbox.shape.a = Vector2(0, SIZE.y)
-	$Floor/Hitbox.shape.b = Vector2(SIZE.x, SIZE.y)
+	$"Right Wall/Hitbox".shape.distance = -SIZE.x
+	$Floor/Hitbox.shape.distance = -SIZE.y
 
 func setup_delaunay(amount: int) -> void:
 	delaunay = Delaunay.new(Rect2(0, 0, SIZE.x, SIZE.y))
@@ -103,6 +94,7 @@ func setup_windows(sites, dividor) -> void:
 		
 		window_obj = CollisionWindow.instantiate()
 		window_obj.position = top_left + center
+		window_obj.set_debug(DEBUG)
 		window_obj.set_polygon(polygon)
 		window_obj.add_to_window(polygon_obj)
 		

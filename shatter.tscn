@@ -2,17 +2,16 @@
 
 [ext_resource type="Script" path="res://shatter.gd" id="1_1tf83"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_l5s5p"]
-b = Vector2(0, 0)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rnav1"]
+normal = Vector2(0, 1)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_nqux7"]
-b = Vector2(0, 0)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6nclx"]
+normal = Vector2(1, 0)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_6dn2p"]
-b = Vector2(0, 0)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fo5xi"]
+normal = Vector2(-1, 0)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_5f7ya"]
-b = Vector2(0, 0)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_a4vjf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_62k5c"]
 radius = 7.0
@@ -25,29 +24,28 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="Shatter" type="Node2D"]
 script = ExtResource("1_1tf83")
-DEBUG = true
 
 [node name="Windows" type="Node2D" parent="."]
 
 [node name="Ceiling" type="StaticBody2D" parent="."]
 
 [node name="Hitbox" type="CollisionShape2D" parent="Ceiling"]
-shape = SubResource("SegmentShape2D_l5s5p")
+shape = SubResource("WorldBoundaryShape2D_rnav1")
 
 [node name="Left Wall" type="StaticBody2D" parent="."]
 
 [node name="Hitbox" type="CollisionShape2D" parent="Left Wall"]
-shape = SubResource("SegmentShape2D_nqux7")
+shape = SubResource("WorldBoundaryShape2D_6nclx")
 
 [node name="Right Wall" type="StaticBody2D" parent="."]
 
 [node name="Hitbox" type="CollisionShape2D" parent="Right Wall"]
-shape = SubResource("SegmentShape2D_6dn2p")
+shape = SubResource("WorldBoundaryShape2D_fo5xi")
 
 [node name="Floor" type="StaticBody2D" parent="."]
 
 [node name="Hitbox" type="CollisionShape2D" parent="Floor"]
-shape = SubResource("SegmentShape2D_5f7ya")
+shape = SubResource("WorldBoundaryShape2D_a4vjf")
 
 [node name="Mouse" type="AnimatableBody2D" parent="."]
 

@@ -9,6 +9,10 @@ var half_size: Vector2i
 func _ready() -> void:
 	$Window.size = get_window().size
 
+func set_debug(debug) -> void:
+	if not debug:
+		$"Window/Debug Cross".queue_free()
+
 func set_polygon(polygon) -> void:
 	$CollisionPolygon2D.set_polygon(polygon)
 
@@ -23,7 +27,6 @@ func add_to_window(element) -> void:
 		if not has_polygon:
 			has_polygon = true
 			furthest = child.polygon[0].length()
-			continue
 		
 		for point in child.polygon:
 			var length = point.length()
@@ -34,7 +37,6 @@ func add_to_window(element) -> void:
 	# Windows (OS) doesn't like less than 120px wide windows
 	size.x = max(120, size.x)
 	half_size = size/2
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
